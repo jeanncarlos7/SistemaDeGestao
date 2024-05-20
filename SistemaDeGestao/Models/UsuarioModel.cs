@@ -1,11 +1,22 @@
-﻿namespace SistemaDeGestao.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace SistemaDeGestao.Models
 {
     public class UsuarioModel
     {
+        [Key]
+        [Column("Id")]
         public int Id { get; set; }
-        public string? Nome { get; set; }
-        public string? Email { get; set; }
 
-        public ICollection<AvaliacaoModel>? Avaliacoes { get; set; }
+        [Column("Nome")]
+        public string Nome { get; set; }
+
+        [Column("Email")]
+        public string Email { get; set; }
+
+        [JsonIgnore]
+        public ICollection<AvaliacaoModel> Avaliacoes { get; set; }
     }
 }

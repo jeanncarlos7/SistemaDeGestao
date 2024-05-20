@@ -18,6 +18,19 @@ namespace SistemaDeGestao.Data
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new TarefaMap());
             modelBuilder.ApplyConfiguration(new AvaliacaoMap());
+
+            modelBuilder.Entity<AvaliacaoModel>()
+            .HasOne(a => a.Usuario)
+            .WithMany(u => u.Avaliacoes)
+            .HasForeignKey(a => a.UsuarioId)
+            .HasConstraintName("FK_AvaliacaoModel_Usuario");
+
+            modelBuilder.Entity<UsuarioModel>()
+                .HasKey(u => u.Id);
+
+            modelBuilder.Entity<AvaliacaoModel>()
+                .HasKey(a => a.Id);
+
             base.OnModelCreating(modelBuilder);
         }
     }

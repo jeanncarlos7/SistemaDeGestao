@@ -85,9 +85,15 @@ namespace SistemaDeGestao.Controllers
         public async Task<ActionResult<AvaliacaoModel>> Atualizar(int id, [FromBody] AvaliacaoModel avaliacaoModel)
         {
             if (avaliacaoModel == null || avaliacaoModel.Id != id)
-            {
                 return BadRequest();
-            }
+
+            var avaliacaoModel = new AvaliacaoModel
+            {
+                Nome = avaliacaoModel.Nome,
+                Descricao = avaliacaoModel.Descricao,
+                Status = avaliacaoModel.Status,
+                Email = avaliacaoModel.Email,
+            };
 
             AvaliacaoModel avaliacaoAtualizada = await _avaliacaoRepositorio.Atualizar(avaliacaoModel, id);
             if (avaliacaoAtualizada == null)

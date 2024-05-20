@@ -1,6 +1,7 @@
 ﻿using SistemaDeGestao.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SistemaDeGestao.Models
 {
@@ -23,6 +24,7 @@ namespace SistemaDeGestao.Models
         public int UsuarioId { get; set; }
 
         [ForeignKey("UsuarioId")]
+        [JsonIgnore]
         public UsuarioModel Usuario { get; set; }
 
         [Column("Email")]
