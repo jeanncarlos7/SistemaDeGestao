@@ -13,9 +13,13 @@ namespace SistemaDeGestao.Repositorios
         }
         public async Task<UsuarioModel> BuscarPorId(int id)
         {
-            return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            var usuario = await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            if (usuario == null)
+            {
+                throw new Exception($"Usuário com ID {id} não encontrado.");
+            }
+            return usuario;
         }
-
         public async Task<List<UsuarioModel>> BuscarTodosUsuarios()
         {
             return await _dbContext.Usuarios.ToListAsync();
@@ -66,11 +70,14 @@ namespace SistemaDeGestao.Repositorios
             return true;
         }
 
+        public async Task<UsuarioModel> ObterPorId(int id)
+        {
+            return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public Task<UsuarioModel> Buscar(UsuarioModel usuario, int id)
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

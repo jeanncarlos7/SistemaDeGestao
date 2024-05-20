@@ -9,6 +9,7 @@ namespace SistemaDeGestao.Repositorios.Interfaces
         Task<UsuarioModel> Adicionar(UsuarioModel usuario);
         Task<UsuarioModel> Buscar(UsuarioModel usuario, int id);
         Task<bool> Apagar(int id);
+        Task<UsuarioModel> ObterPorId(int id);
         Task<UsuarioModel> Atualizar(UsuarioModel usuarioModel, int id);
     }
 }

@@ -43,8 +43,8 @@ namespace SistemaDeGestao.Controllers
         public async Task<ActionResult<TarefaModel>> Atualizar([FromBody] TarefaModel TarefaModel, int id)
         {
             TarefaModel.Id = id;
-            TarefaModel usuario = await _tarefaRepositorio.Atualizar(TarefaModel, id);
-            return Ok(usuario);
+            TarefaModel tarefa = await _tarefaRepositorio.Atualizar(TarefaModel, id);
+            return Ok(tarefa);
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<TarefaModel>> Apagar(int id)

@@ -6,21 +6,18 @@ namespace SistemaDeGestao.Data
 {
     public class SistemaTarefasDBContext : DbContext
     {
-        public SistemaTarefasDBContext(DbContextOptions<SistemaTarefasDBContext> options)
-            : base(options) 
+        public SistemaTarefasDBContext(DbContextOptions<SistemaTarefasDBContext> options): base(options) 
         { 
         }
 
         public DbSet<UsuarioModel> Usuarios { get; set; }
         public DbSet<TarefaModel> Tarefas { get; set; }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //=> options.UseSqlServer("Server=localhost,1433;Database=DB_SistemaTarefas;User ID=sa;Password=12qwaszx!@QWASZX;;Encrypt=False;Trusted_Connection=False; TrustServerCertificate=True;");
-
+        public DbSet<AvaliacaoModel> Avaliacoes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new TarefaMap());
+            modelBuilder.ApplyConfiguration(new AvaliacaoMap());
             base.OnModelCreating(modelBuilder);
         }
     }

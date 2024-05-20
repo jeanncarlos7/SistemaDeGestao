@@ -13,12 +13,16 @@ namespace SistemaDeGestao.Repositorios
         }
         public async Task<TarefaModel> BuscarPorId(int id)
         {
-            return await _dbContext.Tarefas.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Tarefas
+                .Include(x => x.Usuario)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<TarefaModel>> BuscarTodas()
         {
-            return await _dbContext.Tarefas.ToListAsync();
+            return await _dbContext.Tarefas
+                .Include (x => x.Usuario)
+                .ToListAsync();
         }
         public async Task<TarefaModel> Adicionar(TarefaModel tarefa)
         {
@@ -38,6 +42,7 @@ namespace SistemaDeGestao.Repositorios
             tarefaPorId.Nome = tarefa.Nome;
             tarefaPorId.Status = tarefa.Status;
             tarefaPorId.Descricao = tarefa.Descricao;
+            tarefaPorId.UsuarioId = tarefa.UsuarioId;   
 
             _dbContext.Tarefas.Update(tarefaPorId);
             await _dbContext.SaveChangesAsync();
@@ -51,7 +56,7 @@ namespace SistemaDeGestao.Repositorios
 
             if (tarefaPorId == null)
             {
-                throw new Exception($"Usuário para o ID: {id} não foi encontrado no banco de dados.");
+                throw new Exception($"Tarefa para o ID: {id} não foi encontrado no banco de dados.");
             }
 
             _dbContext.Tarefas.Remove(tarefaPorId);

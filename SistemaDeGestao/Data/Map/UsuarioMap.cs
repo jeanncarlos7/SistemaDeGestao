@@ -8,9 +8,17 @@ namespace SistemaDeGestao.Data.Map
     {
         public void Configure(EntityTypeBuilder<UsuarioModel> builder)
         {
+            builder.ToTable("Usuarios");
+
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Nome).IsRequired().HasMaxLength(225);
-            builder.Property(x => x.Email).IsRequired().HasMaxLength(150);
+
+            builder.Property(x => x.Nome)
+                .IsRequired()
+                .HasMaxLength(225);
+
+            builder.Property(x => x.Email)
+                .IsRequired()
+                .HasMaxLength(150);
         }
     }
 }
