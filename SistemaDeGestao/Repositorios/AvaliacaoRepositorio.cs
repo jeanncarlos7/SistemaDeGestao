@@ -19,9 +19,7 @@ namespace SistemaDeGestao.Repositorios
 
         public async Task<AvaliacaoModel> BuscarPorId(int id)
         {
-            return await _dbContext.Avaliacoes
-                .Include(x => x.Id)
-                .FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Avaliacoes.FindAsync(id);
         }
 
         public async Task<List<AvaliacaoModel>> BuscarTodasAvaliacao()
@@ -43,32 +41,29 @@ namespace SistemaDeGestao.Repositorios
             }
         }
 
-        public async Task<AvaliacaoModel> Atualizar(AvaliacaoModel avaliacao, int id)
+        public async Task<AvaliacaoModel> AtualizarAvaliacao(AvaliacaoModel avaliacao, int id)
         {
-            AvaliacaoModel avaliacaoPorId = await BuscarPorId(id);
+            var newAvaliacao = await _dbContext.Avaliacoes.FindAsync(id);
 
-            if (avaliacaoPorId == null)
-                throw new Exception($"Avaliação para o ID: {id} não foi encontrada no banco de dados.");
+            if (newAvaliacao == null)
+                return null;
 
-            avaliacaoPorId.Nome = avaliacao.Nome;
-            avaliacaoPorId.Status = avaliacao.Status;
-            avaliacaoPorId.Descricao = avaliacao.Descricao;
-            avaliacaoPorId.Usuario = avaliacao.Usuario;
+            newAvaliacao.Nome = avaliacao.Nome;
+            newAvaliacao.Descricao = avaliacao.Descricao;
+            newAvaliacao.Status = avaliacao.Status;
+            newAvaliacao.Email = avaliacao.Email;
 
-            _dbContext.Avaliacoes.Update(avaliacaoPorId);
             await _dbContext.SaveChangesAsync();
 
-            return avaliacaoPorId;
+            return newAvaliacao;
         }
 
         public async Task<bool> Apagar(int id)
         {
-            AvaliacaoModel avaliacaoPorId = await BuscarPorId(id);
+            AvaliacaoModel avaliacaoPorId = await _dbContext.Avaliacoes.FindAsync(id);
 
             if (avaliacaoPorId == null)
-            {
-                throw new Exception($"Avaliação para o ID: {id} não foi encontrada no banco de dados.");
-            }
+                throw new Exception($"Avaliação para o ID: {id} não foi encontrada no banco de dados.");           
 
             _dbContext.Avaliacoes.Remove(avaliacaoPorId);
             await _dbContext.SaveChangesAsync();

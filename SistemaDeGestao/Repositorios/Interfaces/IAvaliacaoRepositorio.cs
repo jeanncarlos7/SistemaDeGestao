@@ -9,7 +9,7 @@ namespace SistemaDeGestao.Repositorios.Interfaces
         Task<AvaliacaoModel> BuscarPorId(int id);
         Task<List<AvaliacaoModel>> BuscarTodasAvaliacao();
         Task<AvaliacaoModel> Adicionar(AvaliacaoModel avaliacao);
-        Task<AvaliacaoModel> Atualizar(AvaliacaoModel avaliacao, int id);
+        Task<AvaliacaoModel> AtualizarAvaliacao(AvaliacaoModel avaliacao, int id);
         Task<bool> Apagar(int id);
     }
 }

@@ -82,20 +82,12 @@ namespace SistemaDeGestao.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<AvaliacaoModel>> Atualizar(int id, [FromBody] AvaliacaoModel avaliacaoModel)
+        public async Task<ActionResult<AvaliacaoModel>> Atualizar(int id, [FromBody] AvaliacaoModel UpavaliacaoModel)
         {
-            if (avaliacaoModel == null || avaliacaoModel.Id != id)
+            if (UpavaliacaoModel == null || UpavaliacaoModel.Id != id)
                 return BadRequest();
 
-            var avaliacaoModel = new AvaliacaoModel
-            {
-                Nome = avaliacaoModel.Nome,
-                Descricao = avaliacaoModel.Descricao,
-                Status = avaliacaoModel.Status,
-                Email = avaliacaoModel.Email,
-            };
-
-            AvaliacaoModel avaliacaoAtualizada = await _avaliacaoRepositorio.Atualizar(avaliacaoModel, id);
+            AvaliacaoModel avaliacaoAtualizada = await _avaliacaoRepositorio.AtualizarAvaliacao(UpavaliacaoModel, id);
             if (avaliacaoAtualizada == null)
             {
                 return NotFound();
@@ -108,9 +100,8 @@ namespace SistemaDeGestao.Controllers
         {
             bool apagado = await _avaliacaoRepositorio.Apagar(id);
             if (!apagado)
-            {
                 return NotFound();
-            }
+            
             return Ok(apagado);
         }
     }

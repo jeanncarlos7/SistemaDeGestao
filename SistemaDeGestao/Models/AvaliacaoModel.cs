@@ -25,7 +25,7 @@ namespace SistemaDeGestao.Models
 
         [ForeignKey("UsuarioId")]
         [JsonIgnore]
-        public UsuarioModel Usuario { get; set; }
+        public UsuarioModel? Usuario { get; set; }
 
         [Column("Email")]
         public string Email { get; set; }
