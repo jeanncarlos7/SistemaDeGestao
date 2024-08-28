@@ -37,6 +37,17 @@ namespace SistemaDeGestao
 
             var app = builder.Build();
 
+            // Program.cs - Swagger Configuration
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "API Sistema de Gestão",
+                    Description = "Documentação da API Sistema de Gestão",
+                });
+            });
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
