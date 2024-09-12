@@ -30,7 +30,8 @@ namespace SistemaDeGestao.Repositorios
 
         public async Task<AvaliacaoModel> Adicionar(AvaliacaoModel avaliacaoModel)
         {
-            try { 
+            try
+            {
                 await _dbContext.Avaliacoes.AddAsync(avaliacaoModel);
                 await _dbContext.SaveChangesAsync();
                 return avaliacaoModel;
@@ -63,7 +64,7 @@ namespace SistemaDeGestao.Repositorios
             AvaliacaoModel avaliacaoPorId = await _dbContext.Avaliacoes.FindAsync(id);
 
             if (avaliacaoPorId == null)
-                throw new Exception($"Avaliação para o ID: {id} não foi encontrada no banco de dados.");           
+                throw new Exception($"Avaliação para o ID: {id} não foi encontrada no banco de dados.");
 
             _dbContext.Avaliacoes.Remove(avaliacaoPorId);
             await _dbContext.SaveChangesAsync();

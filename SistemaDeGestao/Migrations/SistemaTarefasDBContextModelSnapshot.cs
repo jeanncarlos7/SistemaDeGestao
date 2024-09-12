@@ -23,117 +23,117 @@ namespace SistemaDeGestao.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("SistemaDeGestao.Models.AvaliacaoModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                b.Property<string>("Descricao")
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .HasColumnType("nvarchar(1000)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(225)
-                        .HasColumnType("nvarchar(225)");
+                b.Property<string>("Nome")
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .HasColumnType("nvarchar(225)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                b.Property<int>("Status")
+                    .HasColumnType("int");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
+                b.Property<int>("UsuarioId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                b.HasIndex("UsuarioId");
 
-                    b.ToTable("Avaliacoes", (string)null);
-                });
+                b.ToTable("Avaliacoes", (string)null);
+            });
 
             modelBuilder.Entity("SistemaDeGestao.Models.TarefaModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Descricao")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                b.Property<string>("Descricao")
+                    .HasMaxLength(1000)
+                    .HasColumnType("nvarchar(1000)");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(225)
-                        .HasColumnType("nvarchar(225)");
+                b.Property<string>("Nome")
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .HasColumnType("nvarchar(225)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                b.Property<int>("Status")
+                    .HasColumnType("int");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("int");
+                b.Property<int?>("UsuarioId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                b.HasIndex("UsuarioId");
 
-                    b.ToTable("Tarefas");
-                });
+                b.ToTable("Tarefas");
+            });
 
             modelBuilder.Entity("SistemaDeGestao.Models.UsuarioModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(225)
-                        .HasColumnType("nvarchar(225)");
+                b.Property<string>("Nome")
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .HasColumnType("nvarchar(225)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Usuarios", (string)null);
-                });
+                b.ToTable("Usuarios", (string)null);
+            });
 
             modelBuilder.Entity("SistemaDeGestao.Models.AvaliacaoModel", b =>
-                {
-                    b.HasOne("SistemaDeGestao.Models.UsuarioModel", "Usuario")
-                        .WithMany("Avaliacoes")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("SistemaDeGestao.Models.UsuarioModel", "Usuario")
+                    .WithMany("Avaliacoes")
+                    .HasForeignKey("UsuarioId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Usuario");
-                });
+                b.Navigation("Usuario");
+            });
 
             modelBuilder.Entity("SistemaDeGestao.Models.TarefaModel", b =>
-                {
-                    b.HasOne("SistemaDeGestao.Models.UsuarioModel", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
+            {
+                b.HasOne("SistemaDeGestao.Models.UsuarioModel", "Usuario")
+                    .WithMany()
+                    .HasForeignKey("UsuarioId");
 
-                    b.Navigation("Usuario");
-                });
+                b.Navigation("Usuario");
+            });
 
             modelBuilder.Entity("SistemaDeGestao.Models.UsuarioModel", b =>
-                {
-                    b.Navigation("Avaliacoes");
-                });
+            {
+                b.Navigation("Avaliacoes");
+            });
 #pragma warning restore 612, 618
         }
     }

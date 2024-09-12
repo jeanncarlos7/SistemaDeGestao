@@ -16,7 +16,7 @@ namespace SistemaDeGestao.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TarefaModel>>> BuscarTodas() 
+        public async Task<ActionResult<List<TarefaModel>>> BuscarTodas()
         {
             List<TarefaModel> usuarios = await _tarefaRepositorio.BuscarTodas();
             return Ok(usuarios);
@@ -24,7 +24,7 @@ namespace SistemaDeGestao.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TarefaModel>> BuscarPorId(int id)
         {
-            TarefaModel tarefa= await _tarefaRepositorio.BuscarPorId(id);
+            TarefaModel tarefa = await _tarefaRepositorio.BuscarPorId(id);
             return Ok(tarefa);
         }
 

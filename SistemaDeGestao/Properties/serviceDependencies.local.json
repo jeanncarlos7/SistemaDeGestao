@@ -1,11 +1,11 @@
 {
-  "dependencies": {
-    "mssql1": {
-      "serviceConnectorResourceId": "",
-      "secretStore": "LocalSecretsFile",
-      "resourceId": null,
-      "type": "mssql.local",
-      "connectionId": "ConnectionStrings:DataBase"
+    "dependencies": {
+        "mssql1": {
+            "serviceConnectorResourceId": "",
+            "secretStore": "LocalSecretsFile",
+            "resourceId": null,
+            "type": "mssql.local",
+            "connectionId": "ConnectionStrings:DataBase"
+        }
     }
-  }
 }

@@ -1,8 +1,10 @@
-
+ï»¿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SistemaDeGestao.Data;
 using SistemaDeGestao.Repositorios;
+using SistemaDeGestao.Services;
+using SistemaDeGestao.Settings;
 
 namespace SistemaDeGestao
 {
@@ -13,6 +15,15 @@ namespace SistemaDeGestao
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+
+            // Carregar as configuraï¿½ï¿½es do MongoDbSettings a partir do appsettings.json
+            builder.Services.Configure<MongoDbSettings>(
+                builder.Configuration.GetSection("MongoDbSettings"));
+
+            // Registrar o serviï¿½o MongoDB como Singleton
+            builder.Services.AddSingleton<MongoDbService>();
+
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
@@ -35,18 +46,18 @@ namespace SistemaDeGestao
             builder.Services.AddScoped<Repositorios.Interfaces.ITarefaRepositorio, TarefaRepositorio>();
             builder.Services.AddScoped<Repositorios.Interfaces.IAvaliacaoRepositorio, AvaliacaoRepositorio>();
 
-            var app = builder.Build();
-
             // Program.cs - Swagger Configuration
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "API Sistema de Gestão",
-                    Description = "Documentação da API Sistema de Gestão",
+                    Title = "API Sistema de Gestï¿½o",
+                    Description = "Documentaï¿½ï¿½o da API Sistema de Gestï¿½o",
                 });
             });
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

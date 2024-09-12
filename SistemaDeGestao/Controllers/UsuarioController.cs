@@ -16,7 +16,7 @@ namespace SistemaDeGestao.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<UsuarioModel>>> BuscarTodosUsuarios() 
+        public async Task<ActionResult<List<UsuarioModel>>> BuscarTodosUsuarios()
         {
             List<UsuarioModel> usuarios = await _usuarioRepositorio.BuscarTodosUsuarios();
             return Ok(usuarios);

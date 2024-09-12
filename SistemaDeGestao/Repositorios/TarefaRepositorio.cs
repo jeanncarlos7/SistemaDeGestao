@@ -21,7 +21,7 @@ namespace SistemaDeGestao.Repositorios
         public async Task<List<TarefaModel>> BuscarTodas()
         {
             return await _dbContext.Tarefas
-                .Include (x => x.Usuario)
+                .Include(x => x.Usuario)
                 .ToListAsync();
         }
         public async Task<TarefaModel> Adicionar(TarefaModel tarefa)
@@ -42,7 +42,7 @@ namespace SistemaDeGestao.Repositorios
             tarefaPorId.Nome = tarefa.Nome;
             tarefaPorId.Status = tarefa.Status;
             tarefaPorId.Descricao = tarefa.Descricao;
-            tarefaPorId.UsuarioId = tarefa.UsuarioId;   
+            tarefaPorId.UsuarioId = tarefa.UsuarioId;
 
             _dbContext.Tarefas.Update(tarefaPorId);
             await _dbContext.SaveChangesAsync();

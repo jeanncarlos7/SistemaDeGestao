@@ -65,7 +65,8 @@ namespace SistemaDeGestao.Controllers
 
                 return CreatedAtAction(nameof(BuscarPorId), new { id = avaliacao.Id }, avaliacao);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 if (ex.InnerException is DbUpdateException dbUpdateException)
                 {
                     var sqlException = dbUpdateException.GetBaseException() as SqlException;
@@ -77,7 +78,7 @@ namespace SistemaDeGestao.Controllers
                         return BadRequest($"Erro ao salvar as alterações no banco de dados: {message}");
                     }
                 }
-                return BadRequest(ex.Message); 
+                return BadRequest(ex.Message);
             }
         }
 
@@ -101,7 +102,7 @@ namespace SistemaDeGestao.Controllers
             bool apagado = await _avaliacaoRepositorio.Apagar(id);
             if (!apagado)
                 return NotFound();
-            
+
             return Ok(apagado);
         }
     }
